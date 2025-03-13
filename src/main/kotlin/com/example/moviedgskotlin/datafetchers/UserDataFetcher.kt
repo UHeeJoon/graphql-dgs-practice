@@ -1,11 +1,13 @@
 package com.example.moviedgskotlin.datafetchers
 
 import com.example.moviedgskotlin.DgsConstants
+import com.example.moviedgskotlin.dataloaders.UserByIdDataLoader
 import com.example.moviedgskotlin.entities.Review
 import com.example.moviedgskotlin.entities.User
 import com.example.moviedgskotlin.repositories.UserRepository
 import com.example.moviedgskotlin.types.AddUserInput
 import com.netflix.graphql.dgs.*
+import java.util.concurrent.CompletableFuture
 
 /**
  * please explain class!
@@ -40,8 +42,10 @@ class UserDataFetcher(
         parentType = DgsConstants.REVIEW.TYPE_NAME,
         field = DgsConstants.REVIEW.User
     )
-    fun getUserByReview(dfe: DgsDataFetchingEnvironment): User {
+    fun getUserByReview(dfe: DgsDataFetchingEnvironment): CompletableFuture<User>? {
         val review = dfe.getSourceOrThrow<Review>()
-        return userRepository.findById(review.user?.id!!).orElseThrow { NoSuchElementException("User not found") }
+//        return userRepository.findById(review.user?.id!!).orElseThrow { NoSuchElementException("User not found") }
+        val dataloader = dfe.getDataLoader<Long, User>(UserByIdDataLoader::class.java)
+        return dataloader.load(review.user?.id!!)
     }
 }

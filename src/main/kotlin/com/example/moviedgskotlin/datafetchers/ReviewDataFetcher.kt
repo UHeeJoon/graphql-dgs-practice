@@ -1,6 +1,7 @@
 package com.example.moviedgskotlin.datafetchers
 
 import com.example.moviedgskotlin.DgsConstants
+import com.example.moviedgskotlin.dataloaders.ReviewsByMovieDataLoader
 import com.example.moviedgskotlin.entities.Movie
 import com.example.moviedgskotlin.entities.Review
 import com.example.moviedgskotlin.entities.User
@@ -10,6 +11,7 @@ import com.netflix.graphql.dgs.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Sinks
 import reactor.util.concurrent.Queues
+import java.util.concurrent.CompletableFuture
 
 /**
  * please explain class!
@@ -62,18 +64,25 @@ class ReviewDataFetcher(
         parentType = DgsConstants.MOVIE.TYPE_NAME,
         field = DgsConstants.MOVIE.Reviews
     )
-    fun getReviewsByMovie(dfe: DgsDataFetchingEnvironment): List<Review> {
+    fun getReviewsByMovie(
+        dfe: DgsDataFetchingEnvironment
+    ): CompletableFuture<List<Review>>? {
         val movie = dfe.getSourceOrThrow<Movie>()
-        return reviewRepository.findByMovieId(movie.id!!)
+//        return reviewRepository.findByMovieId(movie.id!!)
+
+        val dataloader = dfe.getDataLoader<Long, List<Review>>(ReviewsByMovieDataLoader::class.java)
+        return dataloader.load(movie.id!!)
     }
 
     @DgsData(
         parentType = DgsConstants.USER.TYPE_NAME,
         field = DgsConstants.USER.Reviews
     )
-    fun getReviewsByUser(dfe: DgsDataFetchingEnvironment): List<Review> {
+    fun getReviewsByUser(dfe: DgsDataFetchingEnvironment): CompletableFuture<List<Review>>? {
         val user = dfe.getSourceOrThrow<User>()
-        return reviewRepository.findByUserId(user.id!!)
+//        return reviewRepository.findByUserId(user.id!!)
+        val dataloader = dfe.getDataLoader<Long, List<Review>>(ReviewsByMovieDataLoader::class.java)
+        return dataloader.load(user.id!!)
     }
 
 }

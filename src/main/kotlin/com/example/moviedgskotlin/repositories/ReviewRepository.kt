@@ -12,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface ReviewRepository : JpaRepository<Review, Long> {
     fun findByMovieId(movieId: Long): List<Review>
     fun findByUserId(userId: Long): List<Review>
+    fun findAllByMovieIdIn(keys: Collection<Long>): List<Review>?
+    fun findByUserIdIn(keys: Collection<Long>): List<Review>?
 }

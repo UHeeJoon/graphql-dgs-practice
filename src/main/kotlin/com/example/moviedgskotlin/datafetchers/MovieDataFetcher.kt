@@ -1,10 +1,12 @@
 package com.example.moviedgskotlin.datafetchers
 
 import com.example.moviedgskotlin.DgsConstants
+import com.example.moviedgskotlin.dataloaders.MoviesByDirectorDataLoader
 import com.example.moviedgskotlin.entities.Director
 import com.example.moviedgskotlin.entities.Movie
 import com.example.moviedgskotlin.repositories.MovieRepository
 import com.netflix.graphql.dgs.*
+import java.util.concurrent.CompletableFuture
 
 /**
  * please explain class!
@@ -36,9 +38,11 @@ class MovieDataFetcher(
     )
     fun getMovieByDirector(
         dfe: DgsDataFetchingEnvironment
-    ): List<Movie> {
+    ): CompletableFuture<List<Movie>>? {
         val director = dfe.getSourceOrThrow<Director>()
-        return movieRepository.findByDirectorId(director.id!!)
+//        return movieRepository.findByDirectorId(director.id!!)
+        val dataloader = dfe.getDataLoader<Long, List<Movie>>(MoviesByDirectorDataLoader::class.java)
+        return dataloader.load(director.id!!)
     }
 
 }
