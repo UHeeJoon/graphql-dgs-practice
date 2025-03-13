@@ -1,0 +1,59 @@
+""" ISO 형태의 날짜 형식 입니다. """
+scalar Date
+
+type Query {
+    movie(movieId: ID!): Movie!
+    movies: [Movie]!
+
+    user(userId: ID!): User
+}
+
+type Mutation {
+    addUser(input: AddUserInput!): User!
+    addReview(input: AddReviewInput!): Review!
+}
+
+type Subscription {
+    newReview(movieId: ID!): Review!
+}
+
+type Movie {
+    id: ID!
+    title: String!
+    releaseDate: Date!
+    director: Director
+    reviews: [Review!]
+}
+
+type Director {
+    id: ID!
+    name: String!
+    movies: [Movie!]
+}
+
+type Review {
+    id: ID!
+    user: User!
+    rating: Int!
+    comment: String
+    imageFileUrl: String
+}
+
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    reviews: [Review!]!
+}
+
+input AddReviewInput {
+    movieId: ID!
+    userId: ID!
+    rating: Int!
+    comment: String
+}
+
+input AddUserInput {
+    username: String!
+    email: String!
+}
