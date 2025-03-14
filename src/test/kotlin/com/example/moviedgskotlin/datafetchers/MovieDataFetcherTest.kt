@@ -1,5 +1,6 @@
 package com.example.moviedgskotlin.datafetchers
 
+import com.example.moviedgskotlin.customScalars.EmailScalar
 import com.example.moviedgskotlin.entities.Movie
 import com.example.moviedgskotlin.exceptions.CustomDataFetcherExceptionHandler
 import com.example.moviedgskotlin.repositories.MovieRepository
@@ -26,7 +27,8 @@ import java.util.*
     classes = [
         MovieDataFetcher::class,
         DgsExtendedScalarsAutoConfiguration::class,
-        CustomDataFetcherExceptionHandler::class
+        CustomDataFetcherExceptionHandler::class,
+        EmailScalar::class
     ]
 )
 class MovieDataFetcherTest {

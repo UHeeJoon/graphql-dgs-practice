@@ -63,7 +63,8 @@ tasks.generateJava {
     language = "kotlin"
     packageName = "com.example.moviedgskotlin"
     typeMapping = mutableMapOf(
-        "ID" to "Long"
+        "ID" to "Long",
+        "Email" to "String"
     )
     /**
      * 스키마에 작성된 Query, Mutation, Subscription을 자동으로 생성한다.

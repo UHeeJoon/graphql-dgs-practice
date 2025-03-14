@@ -3,6 +3,7 @@ package com.example.moviedgskotlin.datafetchers
 import com.example.moviedgskotlin.client.MovieGraphQLQuery
 import com.example.moviedgskotlin.client.MovieProjectionRoot
 import com.example.moviedgskotlin.config.DataLoaderExecutor
+import com.example.moviedgskotlin.customScalars.EmailScalar
 import com.example.moviedgskotlin.dataloaders.DirectorByIdDataLoader
 import com.example.moviedgskotlin.entities.Director
 import com.example.moviedgskotlin.entities.Movie
@@ -37,7 +38,9 @@ import java.util.*
 
         DirectorDataFetcher::class,
         DirectorByIdDataLoader::class,
-        DataLoaderExecutor::class
+        DataLoaderExecutor::class,
+
+        EmailScalar::class
     ]
 )
 class MovieDataFetcherTestUsingCodeGenerator {

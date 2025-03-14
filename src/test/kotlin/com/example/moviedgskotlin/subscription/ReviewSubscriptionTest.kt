@@ -1,5 +1,6 @@
 package com.example.moviedgskotlin.subscription
 
+import com.example.moviedgskotlin.customScalars.EmailScalar
 import com.example.moviedgskotlin.datafetchers.MovieDataFetcher
 import com.example.moviedgskotlin.datafetchers.ReviewDataFetcher
 import com.example.moviedgskotlin.datafetchers.UserDataFetcher
@@ -32,6 +33,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean
     classes = [
         DgsExtendedScalarsAutoConfiguration::class,
         ReviewDataFetcher::class,
+        EmailScalar::class
     ]
 )
 @EnableDgsTest
