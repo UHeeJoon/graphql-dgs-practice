@@ -8,7 +8,6 @@ import com.example.moviedgskotlin.repositories.DirectorRepository
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment
-import org.slf4j.LoggerFactory
 import java.util.concurrent.CompletableFuture
 
 /**
@@ -18,9 +17,7 @@ import java.util.concurrent.CompletableFuture
  * @date        :2025-03-13 오후 9:00
  */
 @DgsComponent
-class DirectorDataFetcher(
-    private val directorRepository: DirectorRepository
-) {
+class DirectorDataFetcher {
 
     @DgsData(
         parentType = DgsConstants.MOVIE.TYPE_NAME,

@@ -26,5 +26,4 @@ class Movie(
     @OneToMany(mappedBy = "movie")
     val reviews:  List<Review>? = emptyList()
 
-) {
-}
+)

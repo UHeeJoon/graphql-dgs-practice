@@ -9,5 +9,4 @@ import org.springframework.data.jpa.repository.JpaRepository
  * @author       :Uheejoon
  * @date        :2025-03-10 오전 1:43
  */
-interface DirectorRepository:  JpaRepository<Director, Long>{
-}
+interface DirectorRepository:  JpaRepository<Director, Long>

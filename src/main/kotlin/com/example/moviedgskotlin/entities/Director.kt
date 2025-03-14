@@ -18,5 +18,4 @@ class Director(
     @OneToMany(mappedBy = "director")
     val movies: List<Movie>? = emptyList()
 
-) {
-}
+)
