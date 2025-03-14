@@ -1,0 +1,5 @@
+subscription NewReview {
+    newReview(movieId: "101") {
+        id
+    }
+}

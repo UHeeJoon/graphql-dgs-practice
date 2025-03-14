@@ -1,0 +1,13 @@
+mutation addReview {
+    addReview(
+        input: {
+            movieId: "101"
+            userId: "101"
+            rating: 5
+            comment: "재밌네요"
+        }
+    ) {
+        id
+    }
+}
+
