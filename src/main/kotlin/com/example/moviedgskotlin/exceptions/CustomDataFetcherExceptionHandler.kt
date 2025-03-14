@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture
  * @date        :2025-03-14 오후 4:43
  */
 @Component
-class CustomDataFetcherException : DataFetcherExceptionHandler{
+class CustomDataFetcherExceptionHandler : DataFetcherExceptionHandler{
 
     override fun handleException(handlerParameters: DataFetcherExceptionHandlerParameters): CompletableFuture<DataFetcherExceptionHandlerResult> {
         if(handlerParameters.exception is CustomException) {
