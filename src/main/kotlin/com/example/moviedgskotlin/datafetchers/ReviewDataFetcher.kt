@@ -9,9 +9,15 @@ import com.example.moviedgskotlin.entities.User
 import com.example.moviedgskotlin.repositories.ReviewRepository
 import com.example.moviedgskotlin.types.AddReviewInput
 import com.netflix.graphql.dgs.*
+import jakarta.annotation.PreDestroy
+import org.springframework.util.StringUtils
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Sinks
 import reactor.util.concurrent.Queues
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.StandardCopyOption
+import java.util.UUID
 import java.util.concurrent.CompletableFuture
 
 /**
@@ -27,6 +33,16 @@ class ReviewDataFetcher(
     private val reviewRepository: ReviewRepository
 ) {
 
+    val tempDir: Path = Files.createTempDirectory("review_images")
+
+    // 서버가 종료될 때 생성한 파일 전체 삭제
+    @PreDestroy
+    fun cleanUp() {
+        Files.walk(tempDir)
+            .map { it.toFile() }
+            .forEach { it.delete() }
+    }
+
     @DgsMutation
     fun addReview(
         @InputArgument
@@ -34,11 +50,26 @@ class ReviewDataFetcher(
     ): Review {
         val user = userDataFetcher.user(input.userId)
         val movie = movieDataFetcher.movie(input.movieId)
+
+        // img upload
+        val imageFileUrl = input.imageFile
+            ?.let { imageFile ->
+                // 파일명 생성
+                val fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(imageFile.originalFilename!!)
+                val targetLocation = tempDir.resolve(fileName)
+
+                // 파일 저장
+                Files.copy(imageFile.inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING)
+
+                targetLocation.toString()
+            }
+
         val review = Review(
             user = user,
             movie = movie,
             rating = input.rating,
-            comment = input.comment
+            comment = input.comment,
+            imageFileUrl = imageFileUrl
         )
         reviewRepository.save(review)
 

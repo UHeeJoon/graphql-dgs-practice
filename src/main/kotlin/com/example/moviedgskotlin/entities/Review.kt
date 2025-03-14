@@ -26,4 +26,6 @@ class Review(
     @JoinColumn(name = "movie_id", nullable = false)
     val movie: Movie? = null,
 
+    @Column(nullable = true)
+    val imageFileUrl: String? = null
 )

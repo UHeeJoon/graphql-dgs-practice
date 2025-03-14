@@ -35,6 +35,9 @@ dependencies {
 
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
+    // graphql 용 multipart form
+    runtimeOnly("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.5.3")
+
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

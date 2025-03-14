@@ -4,6 +4,9 @@ scalar Date
 """ Email 형식의 필드 타입 입니다. """
 scalar Email
 
+""" extended scalar에 기본으로 존재하는 파일 Upload 객체 """
+scalar Upload
+
 type Query {
     movie(movieId: ID!): Movie!
     movies: [Movie]!
@@ -54,6 +57,7 @@ input AddReviewInput {
     userId: ID!
     rating: Int!
     comment: String
+    imageFile: Upload
 }
 
 input AddUserInput {
