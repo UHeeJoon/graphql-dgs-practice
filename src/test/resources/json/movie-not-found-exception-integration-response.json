@@ -1,0 +1,32 @@
+{
+  "errors": [
+    {
+      "message": "Movie not found",
+      "locations": [
+        {
+          "line": 2,
+          "column": 5
+        }
+      ],
+      "path": [
+        "movie"
+      ],
+      "extensions": {
+        "class": "com.example.moviedgskotlin.exceptions.CustomNotFoundException",
+        "errorCode": 1002,
+        "stackTrace": {
+          "classLoaderName": "app",
+          "moduleName": null,
+          "moduleVersion": null,
+          "methodName": "movie$lambda$0",
+          "fileName": "MovieDataFetcher.kt",
+          "lineNumber": 33,
+          "nativeMethod": false,
+          "className": "com.example.moviedgskotlin.datafetchers.MovieDataFetcher"
+        },
+        "errorType": "NOT_FOUND"
+      }
+    }
+  ],
+  "data": null
+}

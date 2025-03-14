@@ -1,0 +1,6 @@
+query {
+    movie(movieId: 101) {
+        title
+        releaseDate
+    }
+}
