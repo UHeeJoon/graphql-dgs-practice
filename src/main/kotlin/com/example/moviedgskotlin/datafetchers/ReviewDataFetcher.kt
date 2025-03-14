@@ -2,6 +2,7 @@ package com.example.moviedgskotlin.datafetchers
 
 import com.example.moviedgskotlin.DgsConstants
 import com.example.moviedgskotlin.dataloaders.ReviewsByMovieDataLoader
+import com.example.moviedgskotlin.dataloaders.ReviewsByUserDataLoader
 import com.example.moviedgskotlin.entities.Movie
 import com.example.moviedgskotlin.entities.Review
 import com.example.moviedgskotlin.entities.User
@@ -81,8 +82,9 @@ class ReviewDataFetcher(
     fun getReviewsByUser(dfe: DgsDataFetchingEnvironment): CompletableFuture<List<Review>>? {
         val user = dfe.getSourceOrThrow<User>()
 //        return reviewRepository.findByUserId(user.id!!)
-        val dataloader = dfe.getDataLoader<Long, List<Review>>(ReviewsByMovieDataLoader::class.java)
+        val dataloader = dfe.getDataLoader<Long, List<Review>>(ReviewsByUserDataLoader::class.java)
         return dataloader.load(user.id!!)
+            .thenApply { it ?: emptyList()}
     }
 
 }

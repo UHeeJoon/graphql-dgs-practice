@@ -15,17 +15,19 @@ import java.util.concurrent.Executor
  * @author       :Uheejoon
  * @date        :2025-03-14 오전 1:57
  */
-@DgsDataLoader
+@DgsDataLoader(name = "reviewsByUser")
 class ReviewsByUserDataLoader(
     private val reviewRepository: ReviewRepository,
     @Qualifier("DataLoaderThreadPool")
     private val executor: Executor
 ) : MappedBatchLoader<Long, List<Review>> {
+
     override fun load(keys: MutableSet<Long>): CompletionStage<Map<Long, List<Review>>> {
-        return CompletableFuture.supplyAsync ({
+        return CompletableFuture.supplyAsync({
             reviewRepository
-                .findByUserIdIn(keys)
-                ?.groupBy { it.user?.id!! }
+                .findAllByUserIdIn(keys)
+                .groupBy { it.user?.id!! }
+
         }, executor)
     }
 }
