@@ -4,6 +4,7 @@ import com.example.moviedgskotlin.DgsConstants
 import com.example.moviedgskotlin.dataloaders.UserByIdDataLoader
 import com.example.moviedgskotlin.entities.Review
 import com.example.moviedgskotlin.entities.User
+import com.example.moviedgskotlin.exceptions.CustomNotFoundException
 import com.example.moviedgskotlin.repositories.UserRepository
 import com.example.moviedgskotlin.types.AddUserInput
 import com.netflix.graphql.dgs.*
@@ -24,7 +25,7 @@ class UserDataFetcher(
     fun user(
         @InputArgument userId: Long
     ): User? {
-        return userRepository.findById(userId).orElseThrow { NoSuchElementException("User not found") }
+        return userRepository.findById(userId).orElseThrow { CustomNotFoundException("User not found") }
     }
 
     @DgsMutation

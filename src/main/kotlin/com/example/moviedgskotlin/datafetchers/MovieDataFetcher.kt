@@ -4,6 +4,7 @@ import com.example.moviedgskotlin.DgsConstants
 import com.example.moviedgskotlin.dataloaders.MoviesByDirectorDataLoader
 import com.example.moviedgskotlin.entities.Director
 import com.example.moviedgskotlin.entities.Movie
+import com.example.moviedgskotlin.exceptions.CustomNotFoundException
 import com.example.moviedgskotlin.repositories.MovieRepository
 import com.netflix.graphql.dgs.*
 import java.util.concurrent.CompletableFuture
@@ -29,7 +30,7 @@ class MovieDataFetcher(
         @InputArgument
         movieId: Long
     ): Movie {
-        return movieRepository.findById(movieId).orElseThrow { NoSuchElementException("Movie not found") }
+        return movieRepository.findById(movieId).orElseThrow { CustomNotFoundException("Movie not found") }
     }
 
     @DgsData(
