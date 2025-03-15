@@ -29,7 +29,7 @@ class MovieDataFetcher(
     fun movie(
         @InputArgument
         movieId: Long
-    ): Movie {
+    ): Movie? {
         return movieRepository.findById(movieId).orElseThrow { CustomNotFoundException("Movie not found") }
     }
 

@@ -8,7 +8,7 @@ scalar Email
 scalar Upload
 
 type Query {
-    movie(movieId: ID!): Movie!
+    movie(movieId: ID!): Movie
     movies: [Movie]!
 
     user(userId: ID!): User
