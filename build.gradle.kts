@@ -38,6 +38,8 @@ dependencies {
     // graphql 용 multipart form
     runtimeOnly("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.5.3")
 
+    // Operation caching 용 캐시
+    implementation("com.github.ben-manes.caffeine:caffeine:3.2.0")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
