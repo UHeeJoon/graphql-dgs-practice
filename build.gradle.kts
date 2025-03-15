@@ -35,6 +35,11 @@ dependencies {
 
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
+
+    // metric monitoring
+    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-micrometer")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
     // graphql 용 multipart form
     runtimeOnly("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.5.3")
 
